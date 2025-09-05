@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Boletim
+{% endblock %}
+
+{% block content %}
+  <h2 class="font-base mb-2 ml-4 text-3xl text-white">Boletim</h2>
+  <div class="w-[400px] rounded-lg bg-[#063730] p-6 text-white shadow-2xl">
+    <div class="flex items-start justify-between">
+      <div>
+        <h1 class="text-lg font-semibold">Biologia II (120H)</h1>
+      </div>
+      <span class="rounded-md bg-yellow-400 px-3 py-0.5 text-xs text-black">Cursando</span>
+    </div>
+
+    <div class="mt-4 space-y-1">
+      <p>
+        CH: <span class="font-light">160 aulas</span>
+      </p>
+      <p>
+        Aulas: <span class="font-light">67/160</span>
+      </p>
+      <p>
+        Faltas: <span class="font-light">0</span> <span class="text-green-400">(100% de frequência)</span>
+      </p>
+    </div>
+
+    <div class="mt-6">
+      <p class="mb-2 font-medium">Notas</p>
+      <div class="flex flex-wrap gap-2">
+        <div class="flex h-16 w-16 flex-col items-center justify-center rounded-md bg-teal-500 text-xl text-white">
+          <span class="text-sm font-light">E1</span>
+          <span class="font-semibold">100</span>
+        </div>
+        <div class="flex h-16 w-16 flex-col items-center justify-center rounded-md bg-red-500 text-xl text-white">
+          <span class="text-sm font-light">E2</span>
+          <span class="font-semibold">14</span>
+        </div>
+        <div class="flex h-16 w-16 flex-col items-center justify-center rounded-md bg-yellow-500 text-xl text-white">
+          <span class="text-sm font-light">E3</span>
+          <span class="font-semibold">58</span>
+        </div>
+        <div class="flex h-16 w-16 flex-col items-center justify-center rounded-md bg-black text-xl text-white">
+          <span class="text-sm font-light">E4</span>
+          <span class="font-semibold">0</span>
+        </div>
+        <div class="flex h-16 w-16 flex-col items-center justify-center rounded-md bg-teal-700 text-xl text-white">
+          <span class="text-sm font-light">MD</span>
+          <span class="font-semibold">100</span>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
