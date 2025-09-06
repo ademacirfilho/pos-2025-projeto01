@@ -8,8 +8,8 @@
   <h2 class="text-3xl font-base mb-2 ml-4">Dados gerais</h2>
   <div class="bg-[#063730] p-8 rounded-xl shadow-lg flex items-start space-x-8">
     <div class="w-48 h-48 rounded-lg flex-shrink-0">
-      {% if user_data.url_foto_150x200 %}
-        <img class="w-full h-full object-cover rounded-lg" src="{{ user_data.url_foto_150x200 }}" alt="Foto do SUAP">
+      {% if user.url_foto_150x200 %}
+        <img class="w-full h-full object-cover rounded-lg" src="{{ user.url_foto_150x200 }}" alt="Foto do SUAP">
       {% else %}
         <img class="w-full h-full object-cover rounded-lg" src="https://placehold.co/400" alt="Foto não disponível">
       {% endif %}
@@ -17,35 +17,35 @@
     <div class="grid grid-cols-2 gap-x-16 gap-y-8 flex-grow">
       <div>
         <p class="text-sm text-gray-300 font-light">Nome:</p>
-        <p class="text-lg font-light">{{ user_data.vinculo.nome }}</p>
+        <p class="text-lg font-light">{{ user.vinculo.nome }}</p>
       </div>
       <div>
         <p class="text-sm text-gray-300 font-light">Matrícula:</p>
-        <p class="text-lg font-light">{{ user_data.matricula }}</p>
+        <p class="text-lg font-light">{{ user.matricula }}</p>
       </div>
       <div>
         <p class="text-sm text-gray-300 font-light">Turno:</p>
-        <p class="text-lg font-light">{{ user_data.vinculo.turno }}</p>
+        <p class="text-lg font-light">{{ user.vinculo.turno }}</p>
       </div>
       <div>
         <p class="text-sm text-gray-300 font-light">E-mail Acadêmico:</p>
-        <p class="text-lg font-light">{{ user_data.email }}</p>
+        <p class="text-lg font-light">{{ user.email }}</p>
       </div>
       <div>
         <p class="text-sm text-gray-300 font-light">CPF:</p>
-        <p class="text-lg font-light">{{ user_data.cpf }}</p>
+        <p class="text-lg font-light">{{ user.cpf }}</p>
       </div>
       <div>
         <p class="text-sm text-gray-300 font-light">Campus:</p>
-        <p class="text-lg font-light">{{ user_data.vinculo.campus }}</p>
+        <p class="text-lg font-light">{{ user.vinculo.campus }}</p>
       </div>
       <div>
         <p class="text-sm text-gray-300 font-light">Situação:</p>
-        <p class="text-lg font-light">{{ user_data.vinculo.situacao }}</p>
+        <p class="text-lg font-light">{{ user.vinculo.situacao }}</p>
       </div>
       <div>
         <p class="text-sm text-gray-300 font-light">Curso:</p>
-        <p class="text-lg font-light">{{ user_data.vinculo.curso }}</p>
+        <p class="text-lg font-light">{{ user.vinculo.curso }}</p>
       </div>
     </div>
   </div>

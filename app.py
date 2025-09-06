@@ -22,6 +22,19 @@ oauth.register(
     fetch_token=lambda: session.get('suap_token')
 )
 
+class User:
+    def __init__(self, oauth):
+        self.oauth = oauth
+
+    def get_user_data(self):
+        return self.oauth.suap.get('v2/minhas-informacoes/meus-dados').json()
+
+    def get_boletim(self, ano_letivo, periodo_letivo):
+        return self.oauth.suap.get(f"v2/minhas-informacoes/boletim/{ano_letivo}/{periodo_letivo}/").json()
+
+    def get_periodos(self):
+        return self.oauth.suap.get("v2/minhas-informacoes/meus-periodos-letivos/").json()
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -29,15 +42,37 @@ def index():
 @app.route('/user')
 def user():
     if 'suap_token' in session:
-        meus_dados = oauth.suap.get('rh/meus-dados/')
-        return render_template('user.html', user_data=meus_dados.json())
+        suap_user = User(oauth)
+        user = suap_user.get_user_data()
+        return render_template('user.html', user=user)
     else:
         return render_template('index.html')
 
 
-@app.route('/boletim')
+@app.route("/boletim/", methods=["GET", "POST"])
 def boletim():
-    return render_template('boletim.html')
+    suap_user = User(oauth)
+
+    if request.method == "POST":
+        periodo = request.form["periodo"]
+        return redirect(url_for("boletim", periodo=periodo))
+
+    if request.method == "GET":
+        periodo = request.args.get("periodo", "2025.1")
+
+    ano_letivo, periodo_letivo = periodo.split(".")
+
+    user = suap_user.get_user_data()
+    boletim = suap_user.get_boletim(ano_letivo, periodo_letivo)
+    periodos = suap_user.get_periodos()
+
+    return render_template(
+        "boletim.html",
+        user=user,
+        boletim_data=boletim,
+        periodos=periodos,
+        selected_periodo=periodo
+    )
 
 @app.route('/login')
 def login():
