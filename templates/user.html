@@ -7,39 +7,45 @@
 {% block content %}
   <h2 class="text-3xl font-base mb-2 ml-4">Dados gerais</h2>
   <div class="bg-[#063730] p-8 rounded-xl shadow-lg flex items-start space-x-8">
-    <div class="w-48 h-48 bg-gray-300 rounded-lg flex-shrink-0"></div>
+    <div class="w-48 h-48 rounded-lg flex-shrink-0">
+      {% if user_data.url_foto_150x200 %}
+        <img class="w-full h-full object-cover rounded-lg" src="{{ user_data.url_foto_150x200 }}" alt="Foto do SUAP">
+      {% else %}
+        <img class="w-full h-full object-cover rounded-lg" src="https://placehold.co/400" alt="Foto não disponível">
+      {% endif %}
+    </div>
     <div class="grid grid-cols-2 gap-x-16 gap-y-8 flex-grow">
       <div>
         <p class="text-sm text-gray-300 font-light">Nome:</p>
-        <p class="text-lg font-light">Ademacir Araújo de Azevedo Filho</p>
+        <p class="text-lg font-light">{{ user_data.vinculo.nome }}</p>
       </div>
       <div>
         <p class="text-sm text-gray-300 font-light">Matrícula:</p>
-        <p class="text-lg font-light">20221181110031</p>
+        <p class="text-lg font-light">{{ user_data.matricula }}</p>
       </div>
       <div>
-        <p class="text-sm text-gray-300 font-light">Ingresso:</p>
-        <p class="text-lg font-light">2022/1</p>
+        <p class="text-sm text-gray-300 font-light">Turno:</p>
+        <p class="text-lg font-light">{{ user_data.vinculo.turno }}</p>
       </div>
       <div>
         <p class="text-sm text-gray-300 font-light">E-mail Acadêmico:</p>
-        <p class="text-lg font-light">filho.azevedo@academico.ifrn.edu.br</p>
-      </div>
-      <div>
-        <p class="text-sm text-gray-300 font-light">E-mail Google Sala de Aula:</p>
-        <p class="text-lg font-light">ademacir.filho@escolar.ifrn.edu.br</p>
+        <p class="text-lg font-light">{{ user_data.email }}</p>
       </div>
       <div>
         <p class="text-sm text-gray-300 font-light">CPF:</p>
-        <p class="text-lg font-light">112.127.784-56</p>
+        <p class="text-lg font-light">{{ user_data.cpf }}</p>
       </div>
       <div>
-        <p class="text-sm text-gray-300 font-light">Período de Referência:</p>
-        <p class="text-lg font-light">4º</p>
+        <p class="text-sm text-gray-300 font-light">Campus:</p>
+        <p class="text-lg font-light">{{ user_data.vinculo.campus }}</p>
       </div>
       <div>
-        <p class="text-sm text-gray-300 font-light">I.R.A.:</p>
-        <p class="text-lg font-light">84,37</p>
+        <p class="text-sm text-gray-300 font-light">Situação:</p>
+        <p class="text-lg font-light">{{ user_data.vinculo.situacao }}</p>
+      </div>
+      <div>
+        <p class="text-sm text-gray-300 font-light">Curso:</p>
+        <p class="text-lg font-light">{{ user_data.vinculo.curso }}</p>
       </div>
     </div>
   </div>

@@ -22,48 +22,36 @@ oauth.register(
     fetch_token=lambda: session.get('suap_token')
 )
 
-
 @app.route('/')
 def index():
-    return render_template('login.html')
+    return render_template('index.html')
 
-# Login com SUAP
+@app.route('/user')
+def user():
+    if 'suap_token' in session:
+        meus_dados = oauth.suap.get('rh/meus-dados/')
+        return render_template('user.html', user_data=meus_dados.json())
+    else:
+        return render_template('index.html')
+
+
+@app.route('/boletim')
+def boletim():
+    return render_template('boletim.html')
+
 @app.route('/login')
 def login():
     redirect_uri = url_for('auth', _external=True)
+    print(redirect_uri)
     return oauth.suap.authorize_redirect(redirect_uri)
 
-# Callback do SUAP
-@app.route('/auth')
+@app.route('/logout')
+def logout():
+    session.pop('suap_token', None)
+    return redirect(url_for('index'))
+
+@app.route('/login/authorized')
 def auth():
     token = oauth.suap.authorize_access_token()
     session['suap_token'] = token
-
-    # Buscar dados do usuário
-    meus_dados = oauth.suap.get('v2/minhas-informacoes/meus-dados').json()
-    session['user'] = meus_dados
-
     return redirect(url_for('user'))
-
-# Página do usuário
-@app.route('/user')
-def user():
-    if 'user' not in session:
-        return redirect(url_for('index'))
-    return render_template('user.html', user=session['user'])
-
-# Página do boletim
-@app.route('/boletim')
-def boletim():
-    if 'suap_token' not in session:
-        return redirect(url_for('index'))
-
-    ano = request.args.get("ano", "2024")  # ano padrão
-    boletim_data = oauth.suap.get(f'v2/minhas-informacoes/boletins/{ano}').json()
-    return render_template('boletim.html', boletim=boletim_data, ano=ano)
-
-# Logout
-@app.route('/logout')
-def logout():
-    session.clear()
-    return redirect(url_for('index'))
