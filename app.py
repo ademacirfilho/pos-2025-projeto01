@@ -27,7 +27,7 @@ class User:
         self.oauth = oauth
 
     def get_user_data(self):
-        return self.oauth.suap.get('v2/minhas-informacoes/meus-dados').json()
+        return self.oauth.suap.get('rh/meus-dados').json()
 
     def get_boletim(self, ano_letivo, periodo_letivo):
         return self.oauth.suap.get(f"v2/minhas-informacoes/boletim/{ano_letivo}/{periodo_letivo}/").json()

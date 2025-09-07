@@ -1,55 +1,73 @@
 {% extends 'base.html' %}
 
 {% block title %}
-  Dados gerais
+  Painel do Aluno
 {% endblock %}
 
 {% block content %}
-  <h2 class="text-2xl md:text-3xl font-base mb-4 ml-2 md:ml-4">Dados gerais</h2>
+<div class="min-h-screen p-6 md:p-10">
 
-  <div class="bg-[#063730] p-6 md:p-8 rounded-xl shadow-lg flex flex-col md:flex-row items-start gap-6 md:gap-8">
-    
-    <div class="w-32 h-32 md:w-48 md:h-48 rounded-lg flex-shrink-0 self-center md:self-start">
+  <div class="bg-white/10 backdrop-blur-md rounded-3xl shadow-xl p-8 md:p-12 flex flex-col md:flex-row items-center gap-8 border border-white/20">
+
+    <div class="w-32 h-32 md:w-44 md:h-44 rounded-full overflow-hidden border-4 border-white shadow-lg">
       {% if user.url_foto_150x200 %}
-        <img class="w-full h-full object-cover rounded-lg" src="{{ user.url_foto_150x200 }}" alt="Foto do SUAP">
+        <img src="{{ user.url_foto_150x200 }}" alt="Foto" class="w-full h-full object-cover">
       {% else %}
-        <img class="w-full h-full object-cover rounded-lg" src="https://placehold.co/400" alt="Foto não disponível">
+        <img src="https://placehold.co/400" alt="Foto não disponível" class="w-full h-full object-cover">
       {% endif %}
     </div>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 md:gap-x-16 gap-y-6 flex-grow w-full">
-      <div>
-        <p class="text-sm text-gray-300 font-semibold">Nome:</p>
-        <p class="text-lg font-light">{{ user.vinculo.nome }}</p>
-      </div>
-      <div>
-        <p class="text-sm text-gray-300 font-semibold">Matrícula:</p>
-        <p class="text-lg font-light">{{ user.matricula }}</p>
-      </div>
-      <div>
-        <p class="text-sm text-gray-300 font-semibold">Turno:</p>
-        <p class="text-lg font-light">{{ user.vinculo.turno }}</p>
-      </div>
-      <div>
-        <p class="text-sm text-gray-300 font-semibold">E-mail Acadêmico:</p>
-        <p class="text-lg font-light break-words">{{ user.email }}</p>
-      </div>
-      <div>
-        <p class="text-sm text-gray-300 font-semibold">CPF:</p>
-        <p class="text-lg font-light">{{ user.cpf }}</p>
-      </div>
-      <div>
-        <p class="text-sm text-gray-300 font-semibold">Campus:</p>
-        <p class="text-lg font-light">{{ user.vinculo.campus }}</p>
-      </div>
-      <div>
-        <p class="text-sm text-gray-300 font-semibold">Situação:</p>
-        <p class="text-lg font-light">{{ user.vinculo.situacao }}</p>
-      </div>
-      <div>
-        <p class="text-sm text-gray-300 font-semibold">Curso:</p>
-        <p class="text-lg font-light">{{ user.vinculo.curso }}</p>
-      </div>
+    
+    <div class="text-center md:text-left flex-1">
+      <h1 class="text-3xl md:text-4xl font-bold text-white">{{ user.vinculo.nome }}</h1>
+      <p class="text-lg text-gray-200">{{ user.vinculo.curso }}</p>
+      <p class="text-sm text-gray-300">Matrícula: {{ user.matricula }}</p>
     </div>
   </div>
+
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-10">
+    <div class="bg-white/10 backdrop-blur-lg p-6 rounded-2xl text-center shadow-md">
+      <i class="lucide-clock text-3xl text-green-300 mb-2"></i>
+      <p class="text-gray-300 text-sm">Turno</p>
+      <p class="text-lg text-white font-medium">{{ user.vinculo.turno }}</p>
+    </div>
+    <div class="bg-white/10 backdrop-blur-lg p-6 rounded-2xl text-center shadow-md">
+      <i class="lucide-check-circle text-3xl text-blue-300 mb-2"></i>
+      <p class="text-gray-300 text-sm">Situação</p>
+      <p class="text-lg text-white font-medium">{{ user.vinculo.situacao }}</p>
+    </div>
+    <div class="bg-white/10 backdrop-blur-lg p-6 rounded-2xl text-center shadow-md">
+      <i class="lucide-school text-3xl text-yellow-300 mb-2"></i>
+      <p class="text-gray-300 text-sm">Campus</p>
+      <p class="text-lg text-white font-medium">{{ user.vinculo.campus }}</p>
+    </div>
+    <div class="bg-white/10 backdrop-blur-lg p-6 rounded-2xl text-center shadow-md">
+      <i class="lucide-id-card text-3xl text-pink-300 mb-2"></i>
+      <p class="text-gray-300 text-sm">CPF</p>
+      <p class="text-lg text-white font-medium">{{ user.cpf }}</p>
+    </div>
+  </div>
+
+  <div class="bg-white/10 backdrop-blur-lg rounded-2xl shadow-lg p-8 mt-10 border border-white/20">
+    <h2 class="text-xl font-semibold text-white mb-4 flex items-center">
+      <i class="lucide-mail"></i> Contato
+    </h2>
+    <p class="text-gray-300 text-sm mb-1">E-mail Acadêmico</p>
+    <p class="text-lg text-white">{{ user.email }}</p>
+  </div>
+
+  <div class="mt-10">
+    <h3 class="text-xl font-semibold text-white mb-2">Ações rápidas</h3>
+    <div class="flex flex-wrap gap-4">
+      <a href="{{ url_for('boletim') }}" 
+         class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl shadow-md transition">
+        📄 Ver Boletim
+      </a>
+      <a href="https://onedrive.live.com/?redeem=aHR0cHM6Ly8xZHJ2Lm1zL2IvYy8zZDVlYjQ2ZWNkNTg4OWQ1L0VYdGtOZ28zRDB4RHRINXZQUVV3WVlRQjRmb2tRbmZVQUpPUXc3Wk42TDdTbmc%5FZT1MZGY1bVQ&cid=3D5EB46ECD5889D5&id=3D5EB46ECD5889D5%21s0a36647b0f37434cb47e6f3d05306184&parId=3D5EB46ECD5889D5%21765&o=OneUp" 
+         class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-xl shadow-md transition">
+        📅 Calendário
+      </a>
+    </div>
+  </div>
+</div>
+
 {% endblock %}
