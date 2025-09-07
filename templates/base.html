@@ -11,33 +11,39 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet" />
 
     <link rel="stylesheet" href="{{ url_for('static', filename='style/style.css') }}" />
   </head>
 
   <body class="text-white font-lato">
-      <header class="bg-[#063730] p-4 flex justify-between items-center">
-        <div class="flex items-center gap-4">
-          <div class="h-12 w-12 rounded-sm overflow-hidden">
-            <img class="w-full h-full object-cover" src="{{ user.url_foto_75x100 }}" alt="Foto do SUAP">
-          </div>
-
-          <div>
-            <h1 class="text-lg font-semibold text-white">{{ user.nome_usual }}</h1>
-            <p class="text-sm text-gray-300">{{ user.matricula }}</p>
-          </div>
+    
+    <header class="bg-[#063730] p-4 flex flex-wrap md:flex-nowrap justify-between items-center gap-4">
+      
+      <div class="flex items-center gap-4 w-full md:w-auto">
+        <div class="h-12 w-12 rounded-sm overflow-hidden">
+          <img class="w-full h-full object-cover" src="{{ user.url_foto_75x100 }}" alt="Foto do SUAP">
         </div>
-        <nav class="flex items-center space-x-8">
-          <a class="text-white hover:scale-105 transition-all" href="{{ url_for('user') }}">Dados gerais</a>
-          <a class="text-white hover:scale-105 transition-all" href="{{ url_for('boletim') }}">Boletim</a>
-        </nav>
-        <button class="bg-red-600 hover:scale-105 text-white font-bold py-1 px-6 rounded-full transition-all"><a href="{{ url_for('logout') }}">Sair</a></button>
-      </header>
+        <div>
+          <h1 class="text-lg font-semibold text-white">{{ user.nome_usual }}</h1>
+          <p class="text-sm text-gray-300">{{ user.matricula }}</p>
+        </div>
+      </div>
 
-    <main class="m-8">
+      <nav class="flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-8 w-full md:w-auto">
+        <a class="text-white hover:scale-105 transition-all" href="{{ url_for('user') }}">Dados gerais</a>
+        <a class="text-white hover:scale-105 transition-all" href="{{ url_for('boletim') }}">Boletim</a>
+      </nav>
+
+      <div class="w-full md:w-auto flex justify-end">
+        <a href="{{ url_for('logout') }}" class="bg-red-600 hover:scale-105 text-white font-bold py-1 px-6 rounded-full transition-all text-center w-full md:w-auto">
+          Sair
+        </a>
+      </div>
+    </header>
+
+    <main class="m-4 md:m-8">
       {% block content %}
-
       {% endblock %}
     </main>
   </body>

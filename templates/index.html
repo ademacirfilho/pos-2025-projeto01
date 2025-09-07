@@ -8,21 +8,25 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet" />
 
     <link rel="stylesheet" href="{{ url_for('static', filename='style/style.css') }}" />
   </head>
 
-  <body class="flex items-center justify-center min-h-screen flex-col font-lato">
-    <div class="mb-5">
-      <img src="{{ url_for('static', filename='assets/logo.png') }}" alt="Logo" />
+  <body class="flex items-center justify-center min-h-screen flex-col font-lato px-4">
+
+    <div class="mb-6 sm:mb-8">
+      <img src="{{ url_for('static', filename='assets/logo.png') }}" alt="Logo" class="w-32 sm:w-40 md:w-48 mx-auto" />
     </div>
-    <div class="bg-[#063730] p-12 rounded-lg shadow-xl w-full max-w-xl">
-      <div class="text-center mb-12">
-        <h1 class="text-white text-2xl font-bold mb-2">Bem vindo ao Cliente SUAP</h1>
-        <p class="text-white text-lg">Faça login para acessar seu perfil e visualizar seu boletim.</p>
+
+    <div class="bg-[#063730] p-6 sm:p-10 md:p-12 rounded-lg shadow-xl w-full max-w-md md:max-w-xl">
+      <div class="text-center mb-8 md:mb-12">
+        <h1 class="text-white text-xl sm:text-2xl font-bold mb-2">Bem-vindo ao Cliente SUAP</h1>
+        <p class="text-white text-base sm:text-lg">Faça login para acessar seu perfil e visualizar seu boletim.</p>
       </div>
-      <button class="w-full bg-teal-500 text-white font-bold py-3 px-4 rounded-full hover:bg-teal-600 transition duration-300" type="submit"><a href="{{url_for('login')}}">Entrar com SUAP</a></button>
+      <a href="{{url_for('login')}}" class="block w-full bg-teal-500 text-white font-bold py-3 px-4 rounded-full text-center hover:bg-teal-600 transition duration-300">
+        Entrar com SUAP
+      </a>
     </div>
   </body>
 </html>
