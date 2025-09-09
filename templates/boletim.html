@@ -43,7 +43,7 @@
       <p><span class="font-semibold">CH:</span> {{ data.carga_horaria }}H</p>
       <p><span class="font-semibold">Aulas:</span> {{ data.carga_horaria_cumprida }}/{{ data.carga_horaria }}</p>
       <div>
-        <span class="font-semibold">Frequência:</span>
+        <span class="font-semibold">Frequência: {{ data.numero_faltas }} faltas</span>
         <div class="w-full bg-gray-700 rounded-full h-3 mt-1">
           <div class="h-3 rounded-full 
             {% if data.percentual_carga_horaria_frequentada > 75 %}
